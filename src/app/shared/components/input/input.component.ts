@@ -1,9 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-export interface InputFormValue {
-    input: string;
-}
+import { InputFormValue } from '../../models/forms/input/input-form-value';
 
 export interface FadeState {
     visible: boolean;
