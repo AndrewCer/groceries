@@ -3,14 +3,17 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
+import { StoreModule } from '@ngrx/store';
 
 import { GroceryComponent } from './pages/grocery.component';
 import { InputComponent } from '../../shared/components/input/input.component';
 import { ListComponent } from '../../shared/components/list/list.component';
 
+import { GroceryReducer } from '../../shared/store/reducers/grocery.reducer';
+
 export const ROUTES: Routes = [
-    { path: '', component: GroceryComponent }
-  ];
+  { path: '', component: GroceryComponent }
+];
 
 @NgModule({
   imports: [
@@ -18,7 +21,10 @@ export const ROUTES: Routes = [
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    RouterModule.forChild(ROUTES)
+    RouterModule.forChild(ROUTES),
+    StoreModule.forRoot({
+      groceries: GroceryReducer
+    })
   ],
   declarations: [
     GroceryComponent,
@@ -26,4 +32,4 @@ export const ROUTES: Routes = [
     ListComponent
   ]
 })
-export class GroceryModule {}
+export class GroceryModule { }

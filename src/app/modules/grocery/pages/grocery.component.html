@@ -9,9 +9,19 @@
   
   <ion-content>
   
-    <scram-input (formSubmit)="onInputFormSubmit($event)"></scram-input>
+    <scram-input (formSubmit)="onInputFormSubmit($event);"></scram-input>
 
-    <scram-list></scram-list>
+    <scram-list [items]="groceries" (removeItem)="onListItemRemove($event);"></scram-list>
+
+
+    <!-- <h4>List of "Customers"</h4>
+    <ul class="groceries">
+      <li *ngFor="let grocery of groceries | async; let i=index">
+        <span >{{i+1}}.</span> {{grocery.name}}
+      </li>
+    </ul> -->
 
   </ion-content>
+
+
   

@@ -1,33 +1,31 @@
 <ion-list lines="none">
-    <ion-list-header>
-      <ion-label>Things to Get</ion-label>
-    </ion-list-header>
-    <!-- TODO (acer): setup foreach for this ion item or setup a home rolled sliding item component -->
-    <ion-item-sliding>
-      <ion-item>
-        <ion-checkbox slot="start"></ion-checkbox>
-        <ion-label>
-          Apples
-        </ion-label>
-        <ion-note slot="end">
-          <!-- TODO (acer): setup count logic -->
-          200
-        </ion-note>
-      </ion-item>
-  
-      <ion-item-options side="start">
-        <ion-item-option>
-          <ion-icon slot="icon-only" name="md-heart"></ion-icon>
-        </ion-item-option>
-      </ion-item-options>
-  
-      <ion-item-options side="end">
-        <ion-item-option color="warning">
-          <ion-icon slot="icon-only" name="md-create"></ion-icon>
-        </ion-item-option>
-        <ion-item-option color="danger">
-          <ion-icon slot="icon-only" name="md-trash"></ion-icon>
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
+  <ion-list-header>
+    <ion-label>Things to Get</ion-label>
+  </ion-list-header>
+  <ion-item-sliding *ngFor="let item of items | async; let i = index">
+    <ion-item>
+      <ion-checkbox slot="start"></ion-checkbox>
+      <ion-label>
+        {{item.name}}
+      </ion-label>
+      <ion-note slot="end">
+        {{item.count}}
+      </ion-note>
+    </ion-item>
+
+    <ion-item-options side="start">
+      <ion-item-option>
+        <ion-icon slot="icon-only" name="md-heart"></ion-icon>
+      </ion-item-option>
+    </ion-item-options>
+
+    <ion-item-options side="end">
+      <ion-item-option color="warning">
+        <ion-icon slot="icon-only" name="md-create"></ion-icon>
+      </ion-item-option>
+      <ion-item-option color="danger" (click)="remove(i)">
+        <ion-icon slot="icon-only" name="md-trash"></ion-icon>
+      </ion-item-option>
+    </ion-item-options>
+  </ion-item-sliding>
+</ion-list>
