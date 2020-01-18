@@ -1,0 +1,19 @@
+<form [formGroup]="form">
+  <ion-item>
+    <!-- TODO (acer): change input styling -->
+    <ion-input type="text" placeholder="Add Item" formControlName="input"></ion-input>
+    <ion-button slot="end" (click)="apply()">Add</ion-button>
+  </ion-item>
+  <ion-item>
+    <!-- <ion-text color="success" *ngIf="valueAdded">
+      Item added!
+    </ion-text> -->
+    <ion-text color="success" [ngClass]="{'fadeOut': valueAdded.fadeOut}" *ngIf="valueAdded.visible">
+      Item added!
+    </ion-text>
+
+    <ion-text color="danger" *ngIf="(form.controls.input.dirty) && ( form.controls.input.errors && form.controls.input.errors.required)">
+      Grocery name required!
+    </ion-text>
+  </ion-item>
+</form>
