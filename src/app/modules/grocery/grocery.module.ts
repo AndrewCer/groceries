@@ -5,11 +5,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 
-import { GroceryComponent } from './pages/grocery.component';
 import { InputComponent } from '../../shared/components/input/input.component';
 import { ListComponent } from '../../shared/components/list/list.component';
-
 import { GroceryReducer } from '../../shared/store/reducers/grocery.reducer';
+
+import { GroceryComponent } from './pages/grocery.component';
 
 export const ROUTES: Routes = [
   { path: '', component: GroceryComponent }

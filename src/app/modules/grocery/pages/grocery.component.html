@@ -1,27 +1,16 @@
 <ion-header>
-    <ion-toolbar>
-      <ion-title>
-          <!-- TODO (acer): potentially change this -->
-        Groceries
-      </ion-title>
-    </ion-toolbar>
-  </ion-header>
-  
-  <ion-content>
-  
-    <scram-input (formSubmit)="onInputFormSubmit($event);"></scram-input>
+  <ion-toolbar>
+    <ion-title>
+      <!-- TODO (acer): potentially change this -->
+      Groceries
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
 
-    <scram-list [items]="groceries" (removeItem)="onListItemRemove($event);"></scram-list>
+<ion-content>
 
+  <scram-input (formSubmit)="onInputFormSubmit($event);"></scram-input>
 
-    <!-- <h4>List of "Customers"</h4>
-    <ul class="groceries">
-      <li *ngFor="let grocery of groceries | async; let i=index">
-        <span >{{i+1}}.</span> {{grocery.name}}
-      </li>
-    </ul> -->
+  <scram-list [items]="groceries" (editItem)="onEditItem($event);" (removeItem)="onListItemRemove($event);"></scram-list>
 
-  </ion-content>
-
-
-  
+</ion-content>

@@ -13,15 +13,9 @@
       </ion-note>
     </ion-item>
 
-    <ion-item-options side="start">
-      <ion-item-option>
-        <ion-icon slot="icon-only" name="md-heart"></ion-icon>
-      </ion-item-option>
-    </ion-item-options>
-
     <ion-item-options side="end">
       <ion-item-option color="warning">
-        <ion-icon slot="icon-only" name="md-create"></ion-icon>
+        <ion-icon slot="icon-only" name="md-create" (click)="edit(item)"></ion-icon>
       </ion-item-option>
       <ion-item-option color="danger" (click)="remove(i)">
         <ion-icon slot="icon-only" name="md-trash"></ion-icon>

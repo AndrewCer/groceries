@@ -1,14 +1,18 @@
 @keyframes fadeOut {
-    from {
-      opacity: 1;
-    }
-  
-    to {
-      opacity: 0;
-    }
+  from {
+    opacity: 1;
   }
 
-  .fadeOut {
-    animation-name: fadeOut;
-    animation-duration: 2s;
+  to {
+    opacity: 0;
   }
+}
+
+.fadeOut {
+  animation-name: fadeOut;
+  animation-duration: 2s;
+}
+
+.action-icon {
+  font-size: 35px;
+}
