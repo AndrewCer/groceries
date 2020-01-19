@@ -1,0 +1,23 @@
+{
+  "name": "scramceries-api",
+  "description": "Koa api for scramceries (grocery app)",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index"
+  },
+  "dependencies": {
+    "@koa/cors": "^3.0.0",
+    "cross-env": "^5.2.0",
+    "dotenv": "^8.0.0",
+    "koa": "^2.6.2",
+    "koa-bodyparser": "^4.2.1",
+    "koa-helmet": "^4.0.0",
+    "koa-logger": "^3.2.0",
+    "koa-respond": "^2.1.0",
+    "koa-router": "^7.4.0",
+    "mongoose": "^5.8.9"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  }
+}

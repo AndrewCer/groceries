@@ -4,6 +4,7 @@
   </ion-list-header>
   <ion-item-sliding *ngFor="let item of items | async; let i = index">
     <ion-item>
+      <!-- TODO (acer): when something is checked, cross it out -->
       <ion-checkbox slot="start"></ion-checkbox>
       <ion-label>
         {{item.name}}
@@ -14,8 +15,8 @@
     </ion-item>
 
     <ion-item-options side="end">
-      <ion-item-option color="warning">
-        <ion-icon slot="icon-only" name="md-create" (click)="edit(item)"></ion-icon>
+      <ion-item-option color="warning" (click)="edit(item)">
+        <ion-icon slot="icon-only" name="md-create"></ion-icon>
       </ion-item-option>
       <ion-item-option color="danger" (click)="remove(i)">
         <ion-icon slot="icon-only" name="md-trash"></ion-icon>
