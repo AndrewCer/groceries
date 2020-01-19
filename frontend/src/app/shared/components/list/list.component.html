@@ -4,9 +4,8 @@
   </ion-list-header>
   <ion-item-sliding *ngFor="let item of items | async; let i = index">
     <ion-item>
-      <!-- TODO (acer): when something is checked, cross it out -->
-      <ion-checkbox slot="start"></ion-checkbox>
-      <ion-label>
+      <ion-checkbox slot="start" checked="{{item.done}}" (click)="checked(item, i)"></ion-checkbox>
+      <ion-label [ngClass]="!item.done ? 'null' : 'strikethrough'">
         {{item.name}}
       </ion-label>
       <ion-note slot="end">

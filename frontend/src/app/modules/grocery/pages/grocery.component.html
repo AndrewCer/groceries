@@ -11,6 +11,7 @@
 
   <scram-input (formSubmit)="onInputFormSubmit($event);"></scram-input>
 
-  <scram-list [items]="groceries" (editItem)="onEditItem($event);" (removeItem)="onListItemRemove($event);"></scram-list>
+  <scram-list [items]="groceries" (editItem)="onEditItem($event);" (removeItem)="onListItemRemove($event);"
+    (checkedItem)="onItemChecked($event);"></scram-list>
 
 </ion-content>

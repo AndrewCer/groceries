@@ -5,6 +5,6 @@ export interface Grocery {
   _id?: number;
 }
 
-export interface ItemToRemove extends Grocery {
+export interface ItemWithIndex extends Grocery {
   index: number;
 }

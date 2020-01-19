@@ -6,6 +6,7 @@ export function GroceryReducer(state = initialState, action: ActionEx) {
 
   switch (action.type) {
     case GroceryActionTypes.Add:
+      // const groceries = (action.payload typeof 'array') 
       return [...state, action.payload];
 
     case GroceryActionTypes.Remove:
