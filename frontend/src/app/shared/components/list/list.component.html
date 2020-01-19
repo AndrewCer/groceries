@@ -1,8 +1,8 @@
 <ion-list lines="none">
   <ion-list-header>
-    <ion-label>{{(items | async).length ? 'Things to get' : 'Add Groceries above to get started'}}</ion-label>
+    <ion-label>{{(items | async).length ? 'Things to get' : 'Add a grocery above to get started'}}</ion-label>
   </ion-list-header>
-  <ion-item-sliding *ngFor="let item of items | async; let i = index">
+  <ion-item-sliding *ngFor="let item of items | async; let i = index" #slidingItem>
     <ion-item>
       <ion-checkbox slot="start" checked="{{item.done}}" (click)="checked(item, i)"></ion-checkbox>
       <ion-label [ngClass]="!item.done ? 'null' : 'strikethrough'">
@@ -14,7 +14,7 @@
     </ion-item>
 
     <ion-item-options side="end">
-      <ion-item-option color="warning" (click)="edit(item)">
+      <ion-item-option color="warning" (click)="edit(item);closeSlider(slidingItem);">
         <ion-icon slot="icon-only" name="md-create"></ion-icon>
       </ion-item-option>
       <ion-item-option color="danger" (click)="remove(item, i)">

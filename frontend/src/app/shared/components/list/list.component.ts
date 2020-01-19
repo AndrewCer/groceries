@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { IonItemSliding } from '@ionic/angular';
 
 import { Grocery, ItemWithIndex } from '../../store/models/grocery.model';
 
@@ -16,6 +17,10 @@ export class ListComponent {
 
     public checked(grocery: Grocery, index: number) {
         this.checkedItem.emit({ ...grocery, index });
+    }
+
+    public closeSlider(slidingItem: IonItemSliding) {
+        slidingItem.closeOpened();
     }
 
     public edit(item: Grocery) {

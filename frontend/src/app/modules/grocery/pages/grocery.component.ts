@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { select, Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
+
+import { EditGroceryComponent } from '../components/edit/edit-grocery.component';
 
 import { Grocery, ItemWithIndex } from '../../../shared/store/models/grocery.model';
 import { InputFormValue } from '../../../shared/models/forms/input/input-form-value';
@@ -19,8 +22,9 @@ export class GroceryComponent implements OnInit {
   groceries: Observable<Grocery[]>;
 
   constructor(
+    public modalController: ModalController,
+    private groceryService: GroceryService,
     private store: Store<{ groceries: Grocery[] }>,
-    private groceryService: GroceryService
   ) {
     this.groceries = store.pipe(select('groceries'));
   }
@@ -57,10 +61,16 @@ export class GroceryComponent implements OnInit {
     }
   }
 
-  public onEditItem(item: Grocery) {
-    // route to edit page, edit page will do a get based off of id that we have from the api
-    console.log('edit this: ', item);
-    // do routing here
+  public async onEditItem(item: Grocery) {
+    // this.router.navigate(['/123']);
+    const modal = await this.modalController.create({
+      component: EditGroceryComponent,
+      componentProps: { id: item._id }
+    });
+    // TODO (acer): get data back
+    // const { data } = await modal.onWillDismiss();
+    // console.log(data);
+    return await modal.present();
   }
 
   public async onItemChecked(itemToUpdate: ItemWithIndex) {
@@ -78,9 +88,9 @@ export class GroceryComponent implements OnInit {
   }
 
   private getDupeItemIndex(groceries: Grocery[], name: string): number {
-      return groceries.findIndex((grocery) => {
-        return grocery.name === name;
-      });
+    return groceries.findIndex((grocery) => {
+      return grocery.name === name;
+    });
   }
 
   private getGroceryState(store: any): Grocery[] {

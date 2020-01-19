@@ -1,0 +1,30 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>Edit</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form *ngIf="form" [formGroup]="form">
+    <ion-list lines="full" class="ion-no-margin ion-no-padding">
+      <ion-item>
+        <ion-label position="stacked">Name<ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input required type="text" formControlName="name"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Count <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input required type="number" formControlName="count"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <section>
+      <ion-button expand="full">Apply</ion-button>
+    </section>
+  </form>
+</ion-content>

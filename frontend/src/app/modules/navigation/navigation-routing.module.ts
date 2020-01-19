@@ -15,27 +15,7 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () =>
-              import('../grocery/grocery.module').then(m => m.GroceryModule),
-          }
-          // {
-          //   path: ':id',
-          //   component: Grocery
-          // }
-          // TODO (acer): setup eddit path
-          // {
-          //   path: ':id',
-          //   loadChildren: () =>
-          //     import('../grocery/grocery.module').then(m => m.GroceryModule)
-          // }
-        ]
-      },
-      {
-        path: 'user',
-        children: [
-          {
-            path: '',
-            loadChildren: () =>
-              import('../user/user.module').then(m => m.UserModule)
+              import('../grocery/grocery.module').then(m => m.GroceryModule)
           }
         ]
       },

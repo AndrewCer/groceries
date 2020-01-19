@@ -6,7 +6,7 @@ async function findAll(ctx) {
 }
 
 async function find(ctx) {
-  const entityId = ctx.request.body.id;
+  const entityId = ctx.params.id;
   const grocery = await Grocery.findById(entityId);
   ctx.body = grocery;
 }
