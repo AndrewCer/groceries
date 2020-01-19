@@ -10,17 +10,13 @@ export class ApiService {
    * Sends a request to the API, returning the data as a basic object.
    * @param method The HTTP method to use. Ex: 'get', 'post', 'put', 'delete'.
    * @param path The relative path from the object's base endpoint. Ex: '/count', '/recent'.
-   * @param params The parameters to pass to the endpoint. Ex: { id: 12345, name: 'apple' }.
+   * @param body The body to pass to the endpoint. Ex: { id: 12345, name: 'apple' }.
    */
-  public request(method: string, path: string, body: any, params?: any): Promise<any> {
+  public request(method: string, path: string, body: any): Promise<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const options: any = { headers };
     // TODO (acer): in a production env we would wire this up with an env file
     const url = 'http://localhost:4000/api' + path;
-
-    if ((method === 'get' || method === 'delete') && params) {
-      options.params = new HttpParams().set('query', JSON.stringify(params));
-    }
 
     switch (method.toLowerCase()) {
       case 'get':

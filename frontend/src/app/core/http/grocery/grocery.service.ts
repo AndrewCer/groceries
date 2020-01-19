@@ -17,7 +17,7 @@ export class GroceryService {
     }
 
     public async find(id: number): Promise<Grocery> {
-        const response = await this.apiService.request('get', this.basePath, null, id);
+        const response = await this.apiService.request('get', `${this.basePath}/${id}`, null);
         return response;
     }
 
@@ -32,7 +32,7 @@ export class GroceryService {
     }
 
     public async delete(id: number): Promise<number> {
-        const response = await this.apiService.request('delete', this.basePath, null, id);
+        const response = await this.apiService.request('delete', `${this.basePath}/${id}`, null);
         return response;
     }
 

@@ -1,6 +1,6 @@
 <ion-list lines="none">
   <ion-list-header>
-    <ion-label>Things to Get</ion-label>
+    <ion-label>{{(items | async).length ? 'Things to get' : 'Add Groceries above to get started'}}</ion-label>
   </ion-list-header>
   <ion-item-sliding *ngFor="let item of items | async; let i = index">
     <ion-item>
