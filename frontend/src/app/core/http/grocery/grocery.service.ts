@@ -18,12 +18,22 @@ export class GroceryService {
 
     public async find(id: number): Promise<Grocery> {
         const response = await this.apiService.request('get', this.basePath, null, id);
-
-        return response.data;
+        return response;
     }
-    // public async findAll(): Promise<Grocery[]> {}
-    // public async update(id: number): Promise<something> {}
 
-    // public async delete(id: number): Promise<something> {}
+    public async findAll(): Promise<Grocery[]> {
+        const response = await this.apiService.request('get', this.basePath, null);
+        return response;
+    }
+
+    public async update(grocery: Grocery, id: number): Promise<Grocery> {
+        const response = await this.apiService.request('put', this.basePath, grocery, id);
+        return response;
+    }
+
+    public async delete(id: number): Promise<number> {
+        const response = await this.apiService.request('delete', this.basePath, null, id);
+        return response;
+    }
 
 }

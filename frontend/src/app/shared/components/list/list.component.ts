@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { Grocery } from '../../store/models/grocery.model';
+import { Grocery, ItemToRemove } from '../../store/models/grocery.model';
 
 @Component({
     selector: 'scram-list',
@@ -11,13 +11,13 @@ export class ListComponent {
     @Input() items: Grocery[];
 
     @Output() public editItem = new EventEmitter<Grocery>();
-    @Output() public removeItem = new EventEmitter<number>();
+    @Output() public removeItem = new EventEmitter<ItemToRemove>();
 
     public edit(item: Grocery) {
         this.editItem.emit(item);
     }
 
-    public remove(itemIndex: number) {
-        this.removeItem.emit(itemIndex);
+    public remove(grocery: Grocery, index: number) {
+        this.removeItem.emit({ ...grocery, index });
     }
 }

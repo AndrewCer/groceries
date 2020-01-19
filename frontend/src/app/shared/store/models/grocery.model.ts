@@ -4,3 +4,7 @@ export interface Grocery {
   name: string;
   _id?: number;
 }
+
+export interface ItemToRemove extends Grocery {
+  index: number;
+}

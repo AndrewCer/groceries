@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-
 import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 
-import { Grocery } from '../../../shared/store/models/grocery.model';
+import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
+
+import { Grocery, ItemToRemove } from '../../../shared/store/models/grocery.model';
 import { InputFormValue } from '../../../shared/models/forms/input/input-form-value';
-import { GroceryAdd, GroceryRemove } from '../../../shared/store/actions/grocery.actions';
+import { GroceryAdd, GroceryRemove, GroceryUpdate } from '../../../shared/store/actions/grocery.actions';
 import { GroceryService } from '../../../core/http/grocery/grocery.service';
 
 
@@ -25,12 +26,25 @@ export class GroceryComponent {
   }
 
   public async onInputFormSubmit(value: InputFormValue) {
-    const grocery: Grocery = {
+    let grocery: Grocery = {
       name: value.input,
       done: false,
       count: 1
     };
-    this.store.dispatch(new GroceryAdd(await this.groceryService.create(grocery)));
+
+    const groceryState = this.getState(this.store);
+
+    const dupeItemIndex = groceryState.findIndex(g => g._id === grocery._id);
+
+    if (dupeItemIndex > -1) {
+      grocery = groceryState[dupeItemIndex];
+      grocery.count = groceryState[dupeItemIndex].count + 1;
+      const groceryServiceResponse = await this.groceryService.update(grocery, grocery._id);
+      this.store.dispatch(new GroceryUpdate(groceryServiceResponse, dupeItemIndex));
+    } else {
+      const groceryServiceResponse = await this.groceryService.create(grocery);
+      this.store.dispatch(new GroceryAdd(groceryServiceResponse));
+    }
   }
 
   public onEditItem(item: Grocery) {
@@ -39,8 +53,17 @@ export class GroceryComponent {
     // do routing here
   }
 
-  public onListItemRemove(groceryIndex: number) {
-    this.store.dispatch(new GroceryRemove(groceryIndex));
+  public async onListItemRemove(itemToRemove: ItemToRemove) {
+    await this.groceryService.delete(itemToRemove._id);
+    this.store.dispatch(new GroceryRemove(itemToRemove.index));
+  }
+
+  private getState(store: any) {
+    let state: Grocery[];
+    store.pipe(take(1)).subscribe(outPut => state = outPut);
+    return state;
   }
 
 }
+
+// TODO(acer): setup try catch to handle await errors
