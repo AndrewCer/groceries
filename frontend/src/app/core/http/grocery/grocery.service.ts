@@ -27,7 +27,7 @@ export class GroceryService {
     }
 
     public async update(grocery: Grocery, id: number): Promise<Grocery> {
-        const response = await this.apiService.request('put', this.basePath, grocery, id);
+        const response = await this.apiService.request('put', `${this.basePath}/${id}`, grocery);
         return response;
     }
 

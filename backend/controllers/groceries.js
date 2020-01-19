@@ -29,7 +29,11 @@ async function remove(ctx) {
 async function update(ctx) {
   const id = ctx.params.id;
   const grocery = await Grocery.findById(id);
-  grocery.done = !grocery.done;
+
+  const groveryUpdates = ctx.request.body;
+  grocery.name = groveryUpdates.name;
+  grocery.done = groveryUpdates.done;
+  grocery.count = groveryUpdates.count;
 
   const updatedGrocery = await grocery.save();
   ctx.body = updatedGrocery;

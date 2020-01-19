@@ -32,13 +32,25 @@ export class GroceryComponent {
       count: 1
     };
 
-    const groceryState = this.getState(this.store);
+    const groceryState = this.getGroceryState(this.store);
 
-    const dupeItemIndex = groceryState.findIndex(g => g._id === grocery._id);
+    let dupeItemIndex: number;
+    console.log(groceryState);
+
+    if (groceryState.length) {
+      dupeItemIndex = groceryState.findIndex((stateGrocery) => {
+        console.log('stateGrocery: ', stateGrocery);
+        console.log('new grocery: ', grocery.name);
+
+
+        return stateGrocery.name === grocery.name;
+      });
+    }
 
     if (dupeItemIndex > -1) {
       grocery = groceryState[dupeItemIndex];
       grocery.count = groceryState[dupeItemIndex].count + 1;
+      console.log('doing update...');
       const groceryServiceResponse = await this.groceryService.update(grocery, grocery._id);
       this.store.dispatch(new GroceryUpdate(groceryServiceResponse, dupeItemIndex));
     } else {
@@ -58,10 +70,10 @@ export class GroceryComponent {
     this.store.dispatch(new GroceryRemove(itemToRemove.index));
   }
 
-  private getState(store: any) {
-    let state: Grocery[];
+  private getGroceryState(store: any): Grocery[] {
+    let state;
     store.pipe(take(1)).subscribe(outPut => state = outPut);
-    return state;
+    return state.groceries;
   }
 
 }
