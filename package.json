@@ -1,0 +1,13 @@
+{
+  "name": "grocery-app-mono-repo",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "concurrently —kill-others \"npm run backend\" \"npm run frontend\"",
+    "backend": "cd backend && npm run dev",
+    "frontend": "cd frontend && ionic serve",
+    "build": "cd frontend && npm run build"
+  },
+  "devDependencies": {
+    "concurrently": "3.5.1"
+  }
+}
