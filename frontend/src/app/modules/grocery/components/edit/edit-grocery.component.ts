@@ -27,6 +27,9 @@ export class EditGroceryComponent implements OnInit {
     }
 
     public dismissModal(updatedItem: Grocery) {
+        if (!updatedItem) {
+            this.modalController.dismiss();
+        }
         if (this.form.valid && !this.form.pristine) {
             this.modalController.dismiss(updatedItem);
         }
