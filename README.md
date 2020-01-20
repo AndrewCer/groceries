@@ -8,10 +8,14 @@
 - `mongod` bash command
     
 
-## Running the monorepo
+## Running the monorepo locally
 
 - Run `mongo` in your terminal to launch local MongoDB
-- `npm run start` (run from this project root)
+- `cd frontend` & `npm i`
+- `cd backend` & `npm i`
+- `cd ..`
+- `npm i` from project root
+- `npm run start` from project root
     - starts backend server
     - serves ionic
 
