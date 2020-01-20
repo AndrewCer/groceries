@@ -1,5 +1,6 @@
 # Grocery App Monorepo
 
+Please follow the details below to get the app spun up locally.
 
 ## Requirements to run
 - Node

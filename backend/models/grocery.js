@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
- 
+
 const GrocerySchema = new mongoose.Schema(
   {
-    count: Number,
-    done:  Boolean,
-    name: String,
+    count: { type: Number, required: true },
+    done: { type: Boolean, required: true },
+    name: { type: String, required: true },
   }
 );
 

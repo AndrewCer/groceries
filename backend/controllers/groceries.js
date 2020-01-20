@@ -6,6 +6,9 @@ async function findAll(ctx) {
 }
 
 async function find(ctx) {
+  if (!ctx.params || !ctx.params.id) {
+    throw new Error(400, 'No ID in request');
+  }
   const entityId = ctx.params.id;
   const grocery = await Grocery.findById(entityId);
   ctx.body = grocery;
