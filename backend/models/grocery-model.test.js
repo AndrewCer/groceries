@@ -13,6 +13,10 @@ describe('Grocery Model', () => {
         });
     });
 
+    afterAll(() => {
+        mongoose.connection.db.dropDatabase();
+    });
+
     describe('when all required fields are passed in', () => {
         it('should create & save grocery successfully', async () => {
             const groceryData = { name: 'Apple', done: false, count: 1 };

@@ -7,12 +7,16 @@ const Ctrl = require('./groceries');
 describe('Grocery Controller', () => {
 
     beforeAll(async () => {
-        await mongoose.connect('mongodb://localhost/groceries', { useNewUrlParser: true, useCreateIndex: true }, (err) => {
+        await mongoose.connect('mongodb://localhost/tests', { useNewUrlParser: true, useCreateIndex: true }, (err) => {
             if (err) {
                 console.error(err);
                 process.exit(1);
             }
         });
+    });
+
+    afterAll(() => {
+        mongoose.connection.db.dropDatabase();
     });
 
     describe('find()', () => {
@@ -29,8 +33,8 @@ describe('Grocery Controller', () => {
                     }
                 }
 
-                await Ctrl.find(ctx);                
-                
+                await Ctrl.find(ctx);
+
                 expect(ctx.body._doc).toEqual(savedGrocery._doc);
             });
         });
@@ -47,7 +51,7 @@ describe('Grocery Controller', () => {
                     const findWithoutId = await Ctrl.find(ctx);
 
                     console.log('*** ', findWithoutId);
-                    
+
                     error = findWithoutId;
                 } catch (error) {
                     err = error
