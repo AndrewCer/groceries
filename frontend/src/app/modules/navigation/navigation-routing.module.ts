@@ -4,8 +4,7 @@ import { NavigationPage } from './pages/navigation.component';
 
 const routes: Routes = [
   {
-    // TODO (acer): change this route...maybe
-    // TODO (acer): add a favorites tab that users can use to quickly add items to the list
+    // NOTE: future improvements include a favorites route as well as a user profile route
     path: 'home',
     component: NavigationPage,
     children: [

@@ -1,6 +1,5 @@
 <form [formGroup]="form">
   <ion-item>
-    <!-- TODO (acer): change input styling -->
     <ion-input type="text" placeholder="Add Item" formControlName="input" (keyup.enter)="apply();"></ion-input>
     <ion-icon class="action-icon" name="ios-add-circle-outline" color="primary" (click)="apply();"></ion-icon>
   </ion-item>

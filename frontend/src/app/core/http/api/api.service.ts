@@ -15,7 +15,7 @@ export class ApiService {
   public request(method: string, path: string, body: any): Promise<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const options: any = { headers };
-    // TODO (acer): in a production env we would wire this up with an env file
+    // NOTE: in a production env we would wire this up with an env variable
     const url = 'http://localhost:4000/api' + path;
 
     switch (method.toLowerCase()) {

@@ -12,7 +12,7 @@ import { InputFormValue } from '../../../shared/models/forms/input/input-form-va
 import { GroceryAdd, GroceryRemove, GroceryUpdate } from '../../../shared/store/actions/grocery.actions';
 import { GroceryService } from '../../../core/http/grocery/grocery.service';
 
-
+// NOTE: future improvements would include proper error handling for this file
 @Component({
   styleUrls: ['./grocery.component.scss'],
   templateUrl: 'grocery.component.html'
@@ -30,8 +30,12 @@ export class GroceryComponent implements OnInit {
   }
 
   public async ngOnInit() {
-    const groceryServiceResponse = await this.groceryService.findAll();
-    groceryServiceResponse.forEach(grovery => this.store.dispatch(new GroceryAdd(grovery)));
+    try {
+      const groceryServiceResponse = await this.groceryService.findAll();
+      groceryServiceResponse.forEach(grovery => this.store.dispatch(new GroceryAdd(grovery)));
+    } catch (error) {
+      this.handleError(error);
+    }
   }
 
   public async onInputFormSubmit(value: InputFormValue) {
@@ -53,28 +57,40 @@ export class GroceryComponent implements OnInit {
       grocery = groceryState[dupeItemIndex];
       grocery.count = groceryState[dupeItemIndex].count + 1;
 
-      const groceryServiceResponse = await this.groceryService.update(grocery, grocery._id);
-      this.store.dispatch(new GroceryUpdate(groceryServiceResponse, dupeItemIndex));
+      try {
+        const groceryServiceResponse = await this.groceryService.update(grocery, grocery._id);
+        this.store.dispatch(new GroceryUpdate(groceryServiceResponse, dupeItemIndex));
+      } catch (error) {
+        this.handleError(error);
+      }
     } else {
-      const groceryServiceResponse = await this.groceryService.create(grocery);
-      this.store.dispatch(new GroceryAdd(groceryServiceResponse));
+      try {
+        const groceryServiceResponse = await this.groceryService.create(grocery);
+        this.store.dispatch(new GroceryAdd(groceryServiceResponse));
+      } catch (error) {
+        this.handleError(error);
+      }
     }
   }
 
   public async onEditItem(item: Grocery) {
-    const modal = await this.modalController.create({
-      component: EditGroceryComponent,
-      componentProps: { id: item._id }
-    });
-    await modal.present();
+    try {
+      const modal = await this.modalController.create({
+        component: EditGroceryComponent,
+        componentProps: { id: item._id }
+      });
+      await modal.present();
 
-    const { data } = await modal.onWillDismiss();
-    if (data) {
-      const groceryState = this.getGroceryState(this.store);
-      const dupeItemIndex = this.getDupeItemIndex(groceryState, '_id', data._id);
+      const { data } = await modal.onWillDismiss();
+      if (data) {
+        const groceryState = this.getGroceryState(this.store);
+        const dupeItemIndex = this.getDupeItemIndex(groceryState, '_id', data._id);
 
-      const groceryServiceResponse = await this.groceryService.update(data, data._id);
-      this.store.dispatch(new GroceryUpdate(groceryServiceResponse, dupeItemIndex));
+        const groceryServiceResponse = await this.groceryService.update(data, data._id);
+        this.store.dispatch(new GroceryUpdate(groceryServiceResponse, dupeItemIndex));
+      }
+    } catch (error) {
+      this.handleError(error);
     }
   }
 
@@ -83,13 +99,21 @@ export class GroceryComponent implements OnInit {
     delete itemToUpdate.index;
     itemToUpdate.done = !itemToUpdate.done;
 
-    const groceryServiceResponse = await this.groceryService.update(itemToUpdate, itemToUpdate._id);
-    this.store.dispatch(new GroceryUpdate(groceryServiceResponse, updateIndex));
+    try {
+      const groceryServiceResponse = await this.groceryService.update(itemToUpdate, itemToUpdate._id);
+      this.store.dispatch(new GroceryUpdate(groceryServiceResponse, updateIndex));
+    } catch (error) {
+      this.handleError(error);
+    }
   }
 
   public async onListItemRemove(itemToRemove: ItemWithIndex) {
-    await this.groceryService.delete(itemToRemove._id);
-    this.store.dispatch(new GroceryRemove(itemToRemove.index));
+    try {
+      await this.groceryService.delete(itemToRemove._id);
+      this.store.dispatch(new GroceryRemove(itemToRemove.index));
+    } catch (error) {
+      this.handleError(error);
+    }
   }
 
   private getDupeItemIndex(groceries: Grocery[], searchProperty: string, searchField: string | number): number {
@@ -104,6 +128,8 @@ export class GroceryComponent implements OnInit {
     return state.groceries;
   }
 
-}
+  private handleError(error) {
+    throw new Error(error);
+  }
 
-// TODO(acer): setup try/catch to handle await errors
+}

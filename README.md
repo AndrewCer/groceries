@@ -20,6 +20,12 @@ Please follow the details below to get the app spun up locally.
     - starts backend server
     - serves ionic
 
+## Running in Xcode emulator
+- `cd frontent`
+- `npm run build`
+- `npm run ios`
+
+
 
 ### Notes
 

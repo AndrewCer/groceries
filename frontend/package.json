@@ -6,8 +6,8 @@
   "scripts": {
     "e2e": "ng e2e",
     "build": "ng build && npm run copy:cap",
-    "run:ios": "npx cap open ios",
-    "run:android": "npx cap open android",
+    "ios": "npx cap open ios",
+    "android": "npx cap open android",
     "copy:cap": "npx cap copy",
     "lint": "ng lint",
     "ng": "ng",
