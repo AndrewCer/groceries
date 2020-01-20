@@ -26,16 +26,18 @@ export class EditGroceryComponent implements OnInit {
         this.setupForm(groceryServiceResponse);
     }
 
-    public dismissModal() {
-        this.modalController.dismiss({
-            dismissed: true
-        });
+    public dismissModal(updatedItem: Grocery) {
+        if (this.form.valid && !this.form.pristine) {
+            this.modalController.dismiss(updatedItem);
+        }
     }
 
     private setupForm(gorcery: Grocery): void {
         this.form = this.formBuilder.group({
             name: [gorcery.name, Validators.required],
-            count: [gorcery.count, Validators.required]
+            count: [gorcery.count, Validators.required],
+            _id: gorcery._id,
+            done: gorcery.done
         });
     }
 

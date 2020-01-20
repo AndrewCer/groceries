@@ -46,7 +46,7 @@ export class GroceryComponent implements OnInit {
     let dupeItemIndex: number;
 
     if (groceryState.length) {
-      dupeItemIndex = dupeItemIndex = this.getDupeItemIndex(groceryState, grocery.name);
+      dupeItemIndex = this.getDupeItemIndex(groceryState, 'name', grocery.name);
     }
 
     if (dupeItemIndex > -1) {
@@ -62,15 +62,20 @@ export class GroceryComponent implements OnInit {
   }
 
   public async onEditItem(item: Grocery) {
-    // this.router.navigate(['/123']);
     const modal = await this.modalController.create({
       component: EditGroceryComponent,
       componentProps: { id: item._id }
     });
-    // TODO (acer): get data back
-    // const { data } = await modal.onWillDismiss();
-    // console.log(data);
-    return await modal.present();
+    await modal.present();
+
+    const { data } = await modal.onWillDismiss();
+    if (data) {
+      const groceryState = this.getGroceryState(this.store);
+      const dupeItemIndex = this.getDupeItemIndex(groceryState, '_id', data._id);
+
+      const groceryServiceResponse = await this.groceryService.update(data, data._id);
+      this.store.dispatch(new GroceryUpdate(groceryServiceResponse, dupeItemIndex));
+    }
   }
 
   public async onItemChecked(itemToUpdate: ItemWithIndex) {
@@ -87,9 +92,9 @@ export class GroceryComponent implements OnInit {
     this.store.dispatch(new GroceryRemove(itemToRemove.index));
   }
 
-  private getDupeItemIndex(groceries: Grocery[], name: string): number {
+  private getDupeItemIndex(groceries: Grocery[], searchProperty: string, searchField: string | number): number {
     return groceries.findIndex((grocery) => {
-      return grocery.name === name;
+      return grocery[searchProperty] === searchField;
     });
   }
 
