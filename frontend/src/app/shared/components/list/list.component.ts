@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IonItemSliding } from '@ionic/angular';
 
 import { Grocery, ItemWithIndex } from '../../store/models/grocery.model';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'scram-list',
@@ -9,7 +10,7 @@ import { Grocery, ItemWithIndex } from '../../store/models/grocery.model';
     styleUrls: ['./list.component.scss']
 })
 export class ListComponent {
-    @Input() items: Grocery[];
+    @Input() items: Observable<Grocery[]>;
 
     @Output() public editItem = new EventEmitter<Grocery>();
     @Output() public removeItem = new EventEmitter<ItemWithIndex>();
