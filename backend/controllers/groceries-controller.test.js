@@ -4,6 +4,8 @@ const Grocery = require('../models/grocery');
 
 const Ctrl = require('./groceries');
 
+// NOTE: This isn't a full coverage test. It's meant for example purposes.
+
 describe('Grocery Controller', () => {
 
     beforeAll(async () => {

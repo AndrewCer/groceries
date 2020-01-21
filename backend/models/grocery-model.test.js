@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 
 const Grocery = require('./grocery');
 
+// NOTE: This isn't a full coverage test. It's meant for example purposes.
+
 describe('Grocery Model', () => {
 
     beforeAll(async () => {

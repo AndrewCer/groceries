@@ -13,7 +13,7 @@ import { InputFormValue } from '../../../shared/models/forms/input/input-form-va
 
 import { GroceryComponent } from './grocery.component';
 
-
+// NOTE: This isn't a full coverage test. It's meant for example purposes.
 
 describe('GroceryComponent', () => {
     let component: GroceryComponent;

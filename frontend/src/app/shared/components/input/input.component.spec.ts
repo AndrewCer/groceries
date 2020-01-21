@@ -4,6 +4,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { InputComponent } from './input.component';
 
+// NOTE: This isn't a full coverage test. It's meant for example purposes.
+
 describe('InputComponent', () => {
     let component: InputComponent;
     let fixture: ComponentFixture<InputComponent>;
