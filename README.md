@@ -42,3 +42,12 @@ Hit the `/api/groceries` endpoint to see an array of all of the persisted items.
 This app is configured to run locally and is not setup for a production environment.
 
 This app has not been tested in a Windows environment.
+
+
+### Screenshots
+
+Home Page
+![home page](/screenshots/home-page.png?raw=true)
+
+Edit Page
+![edit page](/screenshots/edit-page.png?raw=true)
