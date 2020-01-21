@@ -31,7 +31,7 @@ export class GroceryService {
         return response;
     }
 
-    public async delete(id: number): Promise<number> {
+    public async delete(id: number): Promise<Grocery> {
         const response = await this.apiService.request('delete', `${this.basePath}/${id}`, null);
         return response;
     }

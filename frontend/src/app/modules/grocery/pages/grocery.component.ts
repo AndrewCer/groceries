@@ -32,7 +32,7 @@ export class GroceryComponent implements OnInit {
   public async ngOnInit() {
     try {
       const groceryServiceResponse = await this.groceryService.findAll();
-      groceryServiceResponse.forEach(grovery => this.store.dispatch(new GroceryAdd(grovery)));
+      groceryServiceResponse.forEach(grocery => this.store.dispatch(new GroceryAdd(grocery)));
     } catch (error) {
       this.handleError(error);
     }
@@ -45,11 +45,12 @@ export class GroceryComponent implements OnInit {
       count: 1
     };
 
+
     const groceryState = this.getGroceryState(this.store);
 
     let dupeItemIndex: number;
 
-    if (groceryState.length) {
+    if (groceryState && groceryState.length) {
       dupeItemIndex = this.getDupeItemIndex(groceryState, 'name', grocery.name);
     }
 
@@ -74,11 +75,12 @@ export class GroceryComponent implements OnInit {
   }
 
   public async onEditItem(item: Grocery) {
-    try {
+    try {      
       const modal = await this.modalController.create({
         component: EditGroceryComponent,
         componentProps: { id: item._id }
       });
+      console.log('here*** ');
       await modal.present();
 
       const { data } = await modal.onWillDismiss();

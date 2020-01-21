@@ -3,6 +3,7 @@
 Please follow the details below to get the app spun up locally.
 
 ## Requirements to run
+
 - Node
 - MongoDB installed locallyLocal mongoDB and a writeable /data/db directory
     - Mac users - follow the install as well as "Using MongoDB" steps listed here: https://zellwk.com/blog/install-mongodb/
@@ -21,6 +22,7 @@ Please follow the details below to get the app spun up locally.
     - serves ionic
 
 ## Running in Xcode emulator
+
 - `cd frontent`
 - `npm run build`
 - `npm run ios`
@@ -29,7 +31,11 @@ Please follow the details below to get the app spun up locally.
 
 ### Notes
 
-The api runs at `http://localhost:4000`
+Backend tests require that you have `mongod` running locally.
+
+The front end directory structure is based off of this: [highly scalable folder structure](https://itnext.io/choosing-a-highly-scalable-folder-structure-in-angular-d987de65ec7)
+
+The api runs at `http://localhost:4000`.
 
 Hit the `/api/groceries` endpoint to see an array of all of the persisted items.
 
