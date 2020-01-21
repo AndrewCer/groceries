@@ -46,8 +46,10 @@ This app has not been tested in a Windows environment.
 
 ### Screenshots
 
-Home Page
-![home page](/screenshots/home-page.png?raw=true)
+#### Home Page
 
-Edit Page
-![edit page](/screenshots/edit-page.png?raw=true)
+<img src="./screenshots/home-page.png" width="200" height="400">
+
+#### Edit Page
+
+<img src="./screenshots/edit-page.png" width="200" height="400">
